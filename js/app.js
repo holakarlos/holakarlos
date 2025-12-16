@@ -675,6 +675,41 @@ function initLightbox() {
         if (e.key === 'ArrowLeft') prevImage();
     });
 
+    // Touch/Swipe navigation for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum distance for swipe
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        // Check if horizontal swipe is more dominant than vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Swipe left (next image)
+            if (deltaX < -swipeThreshold) {
+                nextImage();
+            }
+            // Swipe right (previous image)
+            else if (deltaX > swipeThreshold) {
+                prevImage();
+            }
+        }
+    }
+
     // Security: Disable right click and drag on image
     lightboxImg.addEventListener('contextmenu', (e) => e.preventDefault());
     lightboxImg.addEventListener('dragstart', (e) => e.preventDefault());
