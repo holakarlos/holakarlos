@@ -633,7 +633,7 @@ footer {
     justify-content: center;
     align-items: center;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 0.8rem; /* Reverted to original */
+    font-size: 0.8rem;
     font-family: var(--font-main);
     letter-spacing: 0.05em;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -649,7 +649,7 @@ footer {
 @media (max-width: 768px) {
     .lightbox-caption {
         bottom: -80px; /* More space from image */
-        width: 90vw;
+        width: 95vw;
     }
     
     .lightbox-caption h3 {
@@ -658,15 +658,27 @@ footer {
     }
     
     .lightbox-exif {
-        font-size: 0.65rem; /* Slightly smaller for better fit */
-        gap: 0.4rem;
+        font-size: 0.55rem; /* Más pequeño para que quepa todo */
+        gap: 0.25rem; /* Menos espacio entre elementos */
         width: 100%;
-        line-height: 1.6; /* Better vertical spacing */
+        flex-wrap: nowrap; /* Forzar una sola línea */
+        overflow-x: auto; /* Por si acaso, permitir scroll horizontal */
+        overflow-y: hidden;
+        letter-spacing: 0.02em; /* Reducir espaciado de letras */
     }
     
     .lightbox-exif .tech-data {
-        padding: 2px 8px; /* Slightly smaller badges */
-        font-size: 0.6rem;
+        padding: 2px 6px; /* Badges más compactos */
+        font-size: 0.52rem;
+        white-space: nowrap; /* No partir el texto dentro de badges */
+    }
+    
+    .lightbox-exif .separator {
+        margin: 0 -3px; /* Separadores más compactos */
+    }
+    
+    .lightbox-exif .year {
+        white-space: nowrap;
     }
 }
 
