@@ -4,7 +4,7 @@
     --text-main: #1a1a1a;
     --text-muted: #666666;
     --accent-color: #000000;
-    --surface-color: #f5f5f5;
+    --surface-color: #eeeeee;
     --nav-bg: rgba(255, 255, 255, 0.8);
     --border-color: #eee;
     
@@ -77,6 +77,20 @@ a {
     text-decoration: none;
     color: inherit;
     cursor: none;
+}
+
+/* Focus Visible for Keyboard Navigation */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Remove default outline for mouse users */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
 }
 
 /* Custom Cursor */
@@ -169,12 +183,18 @@ section {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.05em;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    height: 24px; /* Same as SVG height */
 }
 
 .nav-links {
     display: flex;
     gap: 3rem;
     list-style: none;
+    align-items: center;
+    line-height: 1;
 }
 
 .nav-links a {
@@ -210,6 +230,15 @@ section {
     background: none;
     border: none;
     cursor: pointer;
+    height: 24px; /* Same as logo and SVG */
+}
+
+/* Nav Controls Container */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 24px; /* Same as logo and SVG */
 }
 
 /* Theme Toggle */
@@ -218,12 +247,14 @@ section {
     border: none;
     cursor: pointer;
     color: var(--text-main);
-    padding: 0.5rem;
+    padding: 0;
     transition: transform 0.3s ease, color 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: -1rem; /* Adjust alignment */
+    line-height: 1;
+    height: 24px; /* Same as logo and SVG */
+    width: 24px;
 }
 
 .theme-toggle:hover {
@@ -488,18 +519,24 @@ footer {
         flex-direction: column;
         gap: 6px;
         z-index: 101; /* Above nav-links */
-        margin-left: 1rem; /* Add some space between toggle and hamburger */
+        align-items: center;
+        justify-content: center;
     }
 
     /* Adjust alignment for mobile header */
     .navbar {
         justify-content: space-between;
         padding: 1.5rem; /* Slightly less padding on mobile */
+        align-items: center;
     }
 
-    .theme-toggle {
-        margin-right: 0; /* Reset margin */
-        margin-left: auto; /* Push to right */
+    .logo {
+        align-self: center;
+        vertical-align: middle;
+    }
+
+    .nav-controls {
+        align-self: center;
     }
     
     /* Prevent cursor freeze on button children */

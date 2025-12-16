@@ -710,6 +710,30 @@ function initLightbox() {
         }
     }
 
+    // Keyboard Navigation
+    function handleKeyboard(e) {
+        // Only handle keyboard if lightbox is active
+        if (!lightbox.classList.contains('active')) return;
+
+        switch (e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                prevImage();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                nextImage();
+                break;
+            case 'Escape':
+                e.preventDefault();
+                closeLightbox();
+                break;
+        }
+    }
+
+    // Add keyboard listener
+    document.addEventListener('keydown', handleKeyboard);
+
     // Security: Disable right click and drag on image
     lightboxImg.addEventListener('contextmenu', (e) => e.preventDefault());
     lightboxImg.addEventListener('dragstart', (e) => e.preventDefault());
