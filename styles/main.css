@@ -647,10 +647,26 @@ footer {
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
+    .lightbox-caption {
+        bottom: -80px; /* More space from image */
+        width: 90vw;
+    }
+    
+    .lightbox-caption h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
     .lightbox-exif {
-        font-size: 0.7rem; /* Reverted to original */
-        gap: 0.3rem;
-        width: 95vw;
+        font-size: 0.65rem; /* Slightly smaller for better fit */
+        gap: 0.4rem;
+        width: 100%;
+        line-height: 1.6; /* Better vertical spacing */
+    }
+    
+    .lightbox-exif .tech-data {
+        padding: 2px 8px; /* Slightly smaller badges */
+        font-size: 0.6rem;
     }
 }
 
@@ -729,10 +745,22 @@ footer {
     .lightbox-prev, .lightbox-next {
         font-size: 1.5rem;
         padding: 10px;
+        top: 40%; /* Move up to avoid caption area */
     }
+    
+    .lightbox-close {
+        font-size: 2.5rem;
+        top: 15px;
+        right: 15px;
+    }
+    
     .lightbox img {
-        max-height: 70vh;
-        max-width: 90vw; /* Prevent full width, add side margins */
+        max-height: 60vh; /* Reduced to leave more space for caption */
+        max-width: 90vw;
+    }
+    
+    .lightbox-content {
+        max-height: 90vh; /* Ensure content doesn't overflow */
     }
 }
 
