@@ -364,6 +364,10 @@ body.dark-mode .flash-ray {
     transition: transform 0.6s ease, filter 0.8s ease, opacity 0.5s ease;
     filter: grayscale(70%) blur(10px); /* Initial state: blurred */
     opacity: 0;
+    /* Protección contra descarga */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; /* Previene menú en iOS */
 }
 
 .gallery-item img.loaded {
@@ -600,6 +604,11 @@ footer {
     object-fit: contain;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
     border-radius: 4px;
+    /* Protección contra descarga */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; /* Previene menú en iOS */
+    pointer-events: auto; /* Mantener para eventos de JS */
 }
 
 .lightbox-caption {
