@@ -408,9 +408,12 @@ function initGallery() {
 
     if (!grid || !gallerySection) return;
 
-    // Sort images by year descending (newest first)
-    // If years are equal, we could sort by src (filename) as secondary, but year is main request
-    galleryImages.sort((a, b) => b.year - a.year);
+    // Shuffle images randomly for more dynamic presentation
+    // Fisher-Yates shuffle algorithm
+    for (let i = galleryImages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [galleryImages[i], galleryImages[j]] = [galleryImages[j], galleryImages[i]];
+    }
 
     // Create Load More button
     const loadMoreBtn = document.createElement('button');
