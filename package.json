@@ -1,0 +1,17 @@
+{
+  "name": "webpersonal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "update_gallery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "exifr": "^7.1.3",
+    "sharp": "^0.34.5"
+  }
+}

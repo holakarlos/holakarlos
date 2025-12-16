@@ -1,0 +1,8 @@
+¡Hola!
+
+Pon tus fotos en esta carpeta ('assets/images').
+Luego ve al archivo 'js/app.js' y actualiza los nombres de los archivos para que coincidan con tus fotos.
+
+Ejemplo:
+Si pegas una foto llamada "vacaciones.jpg" aquí, en el código debes poner:
+src: 'assets/images/vacaciones.jpg'

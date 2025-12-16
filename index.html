@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>holakarlos | Personal Website</title>
+    <meta name="description" content="Web personal de holakarlos. Fotografía, proyectos y contacto.">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scroll-progress"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="#" class="logo">holakarlos.</a>
+        <ul class="nav-links">
+            <li><a href="#about">Sobre mí</a></li>
+            <li><a href="#gallery">Galería</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+            <svg viewBox="0 -10 24 34" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <!-- Camera Body -->
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+                <!-- Flash (Hidden by default in dark mode logic, handled by CSS/JS) -->
+                <path class="flash-ray" d="M12 4.5v-6"></path>
+                <path class="flash-ray" d="M16.5 4.5l3 -3"></path>
+                <path class="flash-ray" d="M7.5 4.5l-3 -3"></path>
+            </svg>
+        </button>
+
+        <button class="hamburger" aria-label="Menú">
+            <span class="line1"></span>
+            <span class="line2"></span>
+            <span class="line3"></span>
+        </button>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <p class="greeting">Hola, soy holakarlos</p>
+                <h1 class="headline">Explorando el mundo<br>a través de mi lente.</h1>
+                <div class="cta-wrapper">
+                    <a href="#gallery" class="btn primary-btn">Ver Galería</a>
+                    <a href="#contact" class="btn secondary-btn">Contactar</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container small-container">
+                <h2>Sobre mí</h2>
+                <p>Soy un apasionado de la tecnología y la fotografía. Me dedico profesionalmente al mundo tech, y en
+                    mis ratos libres capturo momentos. Esta web es mi pequeño rincón en internet, una mezcla entre marca
+                    personal y archivo fotográfico.</p>
+                <!-- Aquí podríamos poner más detalles más adelante -->
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Galería</h2>
+                    <p class="subtitle">Una selección de mis capturas favoritas.</p>
+                </div>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Las imágenes se cargarán dinámicamente desde js/content.js -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container small-container">
+                <h2>Contacto</h2>
+                <p>¿Quieres charlar sobre un proyecto o simplemente saludar? Envíame un mensaje.</p>
+                <a href="mailto:hola@holakarlos.com" class="email-link">hola@holakarlos.com</a>
+
+                <div class="social-links">
+                    <!-- Iconos sociales simples -->
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">Twitter</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 holakarlos. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+        <button class="lightbox-prev" aria-label="Anterior">&#10094;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-caption">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-year"></p>
+                <div class="lightbox-exif" id="lightbox-exif">
+                    <!-- EXIF data implanted by JS -->
+                </div>
+            </div>
+        </div>
+        <button class="lightbox-next" aria-label="Siguiente">&#10095;</button>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
