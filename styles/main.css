@@ -18,7 +18,7 @@
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     
     /* Spacing */
-    --container-width: 1200px;
+    --container-width: 1600px;
     --container-small: 800px;
     --spacing-section: 120px;
 }
@@ -112,8 +112,6 @@ body.lightbox-active .cursor-outline {
     border-radius: 50%;
     z-index: 10002;
     pointer-events: none;
-    z-index: 10002;
-    pointer-events: none;
     /* mix-blend-mode: difference; Optional: nice effect against dark backgrounds but can be tricky */
 }
 
@@ -160,7 +158,29 @@ body.hovering .cursor-outline {
 }
 
 section {
-    padding: var(--spacing-section) 0;
+    padding: clamp(32px, 5vw, 48px) 0; /* Tighter elastic padding */
+}
+
+/* Reduce spacing for gallery to connect better with hero */
+.gallery-section {
+    padding-top: clamp(30px, 4vw, 50px); /* Further adjustment: "una chispa" less air */
+    padding-bottom: 20px; /* Reduced from 40px to close gap to About */
+    margin-bottom: 0;
+}
+
+
+/* Specific spacing for About to give it more air on top */
+.about-section {
+    padding-top: 24px; /* Final adjustment for visual continuity with gallery */
+    padding-bottom: 30px; /* Reduced from 60px to close gap to footer */
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Ensure vertical stacking */
+    align-items: center; /* Center items horizontally */
+}
+
+.contact-section {
+    padding: 40px 0; /* Reduced from 60px for better proportion with less content */
 }
 
 /* Navigation */
@@ -171,7 +191,7 @@ section {
     width: 100%;
     padding: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Clean start to control alignment manually */
     align-items: center;
     z-index: 100;
     background: var(--nav-bg);
@@ -180,18 +200,72 @@ section {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.05em;
     display: inline-flex;
-    align-items: center;
+    align-items: baseline; /* Key change per Option B */
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.5px;
     line-height: 1;
-    height: 24px; /* Same as SVG height */
+    font-family: system-ui, -apple-system, Segoe UI, Inter, Helvetica, Arial, sans-serif; /* Preserving font-family */
+}
+
+.logo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: currentColor;
+
+    margin-left: 4px;           /* NUNCA negativo aquí */
+    transform: translateY(0.5px); /* baja */
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* reflejo */
+.logo-dot::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* brillo pequeño */
+.logo-dot::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    left: 2px;
+    top: 2px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+   /* Dark Mode Logo Refinements */
+body.dark-mode .logo-dot {
+    color: #bfbfbf; /* Slightly darker than text */
+}
+
+/* modo oscuro: baja un poco los brillos */
+body.dark-mode .logo-dot::after {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+body.dark-mode .logo-dot::before {
+    background: rgba(255, 255, 255, 0.22);
 }
 
 .nav-links {
+    margin-left: auto; /* Push links to the right */
+    margin-right: 3rem; /* Space between links and controls */
     display: flex;
-    gap: 3rem;
+    gap: 2rem; /* Reduced from 3rem */
     list-style: none;
     align-items: center;
     line-height: 1;
@@ -200,10 +274,11 @@ section {
 .nav-links a {
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em; /* Tightened from 0.05em */
     position: relative;
     color: var(--text-muted);
-    transition: color 0.3s;
+    transition: color 0.3s, opacity 0.3s;
+    opacity: 0.75; /* Lower contrast as requested */
 }
 
 .nav-links a:hover {
@@ -237,7 +312,7 @@ section {
 .nav-controls {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem; /* Tightened from 1rem */
     height: 24px; /* Same as logo and SVG */
 }
 
@@ -286,32 +361,36 @@ body.dark-mode .flash-ray {
 
 /* Hero Section */
 .hero-section {
-    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
+    height: auto;
+    min-height: 0;
+    padding: clamp(7rem, 12vh, 9rem) 0 clamp(1rem, 2vh, 1.5rem); /* Reduced bottom padding to pull gallery up */
+    margin-bottom: 0;
 }
 
 .greeting {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
+    margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
 }
 
 .headline {
-    font-size: 5rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
+    font-size: 4rem; /* Will be responsive via media queries */
+    font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 3rem;
+    margin-bottom: 0; /* No CTA, no bottom margin needed */
+    letter-spacing: -0.02em;
+    font-family: var(--font-main);
 }
 
 .cta-wrapper {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: center;
 }
 
@@ -350,24 +429,34 @@ body.dark-mode .flash-ray {
 
 /* About Section */
 .about-section h2, .contact-section h2, .section-header h2 {
-    font-size: 2.5rem;
+    font-size: 2.0rem; /* Reduced to ~2.0rem for better hierarchy */
     margin-bottom: 2rem;
     letter-spacing: -0.03em;
 }
 
 .about-section p {
-    font-size: 1.2rem;
-    color: var(--text-muted);
+    font-size: 1.5rem; /* Increased from 1.4rem */
+    line-height: 1.7;
+    color: #5a5a5a; /* Darker than previous muted */
+    font-weight: 300;
+    max-width: 720px;
+    text-align: left; /* Left align text for better readability */
 }
 
-/* Gallery Section */
-.gallery-section {
-    background-color: var(--surface-color);
+/* Text Highlight Utility */
+.text-highlight {
+    color: #111; /* Dark emphasis for light mode */
 }
 
+/* Dark Mode Text Highlight */
+body.dark-mode .text-highlight {
+    color: #fff; /* White emphasis for dark mode */
+}
+
+/* Gallery Section - Background unified with body */
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .subtitle {
@@ -375,16 +464,16 @@ body.dark-mode .flash-ray {
 }
 
 .gallery-grid {
-    column-count: 4;
-    column-gap: 2rem;
+    column-count: 5;
+    column-gap: 20px; /* Reduced from 1.5rem (24px) */
 }
 
 .gallery-item {
     position: relative;
     overflow: hidden;
     background-color: #ddd;
-    border-radius: 4px;
-    margin-bottom: 2rem;
+    border-radius: 6px; /* Confirmed 6px */
+    margin-bottom: 20px; /* Reduced from 1.5rem */
     break-inside: avoid;
     display: inline-block;
     width: 100%;
@@ -394,9 +483,7 @@ body.dark-mode .flash-ray {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
-    transition: transform 0.6s ease, filter 0.8s ease, opacity 0.5s ease;
-    filter: grayscale(70%) blur(10px); /* Initial state: blurred */
+    transition: transform 0.6s ease, opacity 0.5s ease;
     opacity: 0;
     /* Protección contra descarga */
     user-select: none;
@@ -405,43 +492,56 @@ body.dark-mode .flash-ray {
 }
 
 .gallery-item img.loaded {
-    filter: grayscale(70%) blur(0);
     opacity: 1;
 }
 
 .gallery-item:hover img.loaded {
-    transform: scale(1.05);
-    filter: grayscale(0%) blur(0);
+    transform: scale(1.02);
 }
 
-.image-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    color: white;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
-}
 
-.gallery-item:hover .image-overlay {
-    opacity: 1;
-    transform: translateY(0);
+
+/* Contact Section */
+/* Moved Footer Note styles to block above */
+/* .footer-note, .footer-divider handled in main block */
+
+.contact-section {
+    text-align: center;
+    padding: 40px 0 30px; /* Tightened bottom padding */
+    background-color: transparent; /* Reverted to white/transparent */
+    margin-top: 0; /* Reset since global section padding handles flow */
 }
 
 /* Contact Section */
+.footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08); /* Slightly more visible */
+    margin: 10px auto 30px;
+}
+
+.footer-note {
+    text-align: center;
+    color: #5a5a5a; /* More presence */
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem; /* Tightened to bring closer to email */
+    margin-top: 0;
+}
+
 .contact-section {
     text-align: center;
+    padding: 20px 0 30px; /* Reduced top padding */
+    background-color: transparent;
+    margin-top: 0;
 }
 
 .email-link {
     display: inline-block;
-    font-size: 3rem;
+    font-size: 2.6rem; /* Increased for final weight */
+    letter-spacing: 0.02em;
     font-weight: 700;
-    margin: 3rem 0;
+    margin: 0.5rem 0 2rem; /* Reduced top margin since Note is above */
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 8px;
@@ -471,7 +571,7 @@ body.dark-mode .flash-ray {
 /* Footer */
 footer {
     text-align: center;
-    padding: 2rem;
+    padding: 1.25rem 0;
     color: var(--text-muted);
     font-size: 0.8rem;
     border-top: 1px solid var(--border-color);
@@ -487,12 +587,16 @@ footer {
 
 @media (max-width: 768px) {
     .gallery-grid {
-        column-count: 2; /* 2 columns for mobile */
-        column-gap: 1rem; /* Smaller gap for mobile */
+        column-count: 2;
+        column-gap: 1rem;
+    }
+
+    .gallery-item {
+        margin-bottom: 1rem;
     }
 
     .headline {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .email-link {

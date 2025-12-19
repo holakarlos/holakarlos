@@ -30,6 +30,7 @@ const galleryImages = [
             "focal": "17mm"
         }
     },
+
     {
         "src": "assets/images/thumbs/IMG_0269.jpeg",
         "full": "assets/images/optimized/IMG_0269.jpeg",
@@ -399,136 +400,53 @@ function initCursor() {
 }
 
 // Gallery Population Logic
-let IMAGES_PER_PAGE = window.innerWidth <= 768 ? 9 : 8; // 9 for mobile (3x3), 8 for desktop
-let currentIndex = 0;
-
 function initGallery() {
     const grid = document.getElementById('gallery-grid');
-    const gallerySection = document.querySelector('#gallery .container');
 
-    if (!grid || !gallerySection) return;
+    if (!grid) return;
 
-    // Shuffle images randomly for more dynamic presentation
-    // Fisher-Yates shuffle algorithm
-    for (let i = galleryImages.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [galleryImages[i], galleryImages[j]] = [galleryImages[j], galleryImages[i]];
-    }
+    // Curated selection of 15 photos - mix of vertical and horizontal formats
+    // Array order: 0:0437, 1:0309, 2:0269, 3:5920, 4:5685, 5:9098, 6:7573, 7:337D, 8:6852, 9:4359(REMOVE), 10:4291...
+    // Original good indices: [2, 3, 4, 5, 0, 6, 7, 8, 9, 10, 11, 13, 14, 16]
+    // IMG_4359 is index 9. We remove it.
+    // Restored IMG_0309 (index 1) but we don't select it if user didn't want it originally?
+    // Wait, "Believe" was index 1 (IMG_0309). User said "no era esa" (it wasn't that one), implying IMG_0309 MIGHT stay?
+    // User wanted to remove "the photo". They pointed to "Believe" (idx 1). Then said "no era esa, es la 4359".
+    // So 0309 stays (but maybe unselected if it wasn't in original list? It was skipping 1).
+    // Original list: [2, 3, 4, 5, 0, 6, 7, 8, 9, 10, 11, 13, 14, 16] -> effectively skipping 1 (0309) anyway.
+    // IMG_4359 is index 9 in the FULL list.
+    // So we just remove '9' from the list.
+    // Mixed order for masonry feel: random shuffle of the previous valid set
+    const selectedIndices = [2, 0, 4, 1, 13, 8, 5, 10, 6, 7, 11, 14, 16, 3];
+    const selectedImages = selectedIndices.map(i => galleryImages[i]);
 
-    // Create Load More button
-    const loadMoreBtn = document.createElement('button');
-    loadMoreBtn.innerText = 'Ver más';
-    loadMoreBtn.classList.add('btn', 'primary-btn', 'load-more-btn');
-    loadMoreBtn.style.marginTop = '2rem';
-    loadMoreBtn.style.display = 'none'; // Hidden initially
+    // Load selected images
+    selectedImages.forEach((imgData, index) => {
+        const item = document.createElement('div');
+        item.classList.add('gallery-item');
 
-    // Wrapper for button to center it
-    const btnWrapper = document.createElement('div');
-    btnWrapper.style.textAlign = 'center';
-    btnWrapper.style.width = '100%';
-    btnWrapper.appendChild(loadMoreBtn);
+        // Add fade-in animation class with stagger
+        item.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.05}s`; // 50ms stagger
 
-    gallerySection.appendChild(btnWrapper);
+        // No dataset index - lightbox disabled for home
 
-    const loadImages = () => {
-        // If we showed all images, this click means "Show Less"
-        if (currentIndex >= galleryImages.length) {
-            // Animate removal row by row (reverse order)
-            // 1. Get all items to remove
-            const allItems = Array.from(grid.querySelectorAll('.gallery-item'));
-            const itemsToRemove = allItems.slice(IMAGES_PER_PAGE);
-
-            // 2. Animate them out in reverse (bottom to top)
-            itemsToRemove.reverse().forEach((item, index) => {
-                // Stagger transition
-                setTimeout(() => {
-                    item.style.animation = 'fadeOutDown 0.3s ease forwards';
-
-                    // Remove from DOM after animation
-                    setTimeout(() => {
-                        item.remove();
-                    }, 300);
-                }, index * 50); // Fast stagger (50ms per item)
-            });
-
-            // 3. Reset state & Scroll after animations complete
-            const totalAnimationTime = (itemsToRemove.length * 50) + 300;
-
-            setTimeout(() => {
-                currentIndex = IMAGES_PER_PAGE;
-                loadMoreBtn.innerText = 'Ver más';
-                loadMoreBtn.style.display = 'inline-block';
-
-                // Smooth scroll to top to realign view
-                document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, totalAnimationTime);
-
-            return;
-        }
-
-        const nextBatch = galleryImages.slice(currentIndex, currentIndex + IMAGES_PER_PAGE);
-
-        nextBatch.forEach((imgData, index) => {
-            const item = document.createElement('div');
-            item.classList.add('gallery-item');
-
-            // Add fade-in animation class for new items with stagger
-            item.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.1}s`; // 100ms stagger
-
-            // Calculate absolute index
-            const absoluteIndex = currentIndex + index;
-
-            item.dataset.index = absoluteIndex; // Store index for lightbox
-
-            item.innerHTML = `
+        item.innerHTML = `
         <img src="${imgData.src}" alt="${imgData.title}" loading="lazy" oncontextmenu="return false;" ondragstart="return false;">
-        <div class="image-overlay">
-            <h3>${imgData.title}</h3>
-            <p>${imgData.year}</p>
-        </div>
     `;
 
-            // Blur-up logic
-            const img = item.querySelector('img');
+        // Blur-up logic
+        const img = item.querySelector('img');
 
-            // If image is already cached/loaded
-            if (img.complete) {
-                img.classList.add('loaded');
-            } else {
-                img.onload = () => {
-                    img.classList.add('loaded');
-                };
-            }
-
-            // Remove the previous opacity=0 hack as we are now handling it via CSS class
-            // item.style.opacity = '0';
-
-            grid.appendChild(item);
-        });
-
-        currentIndex += nextBatch.length;
-
-        // Check if we reached the end
-        if (currentIndex >= galleryImages.length) {
-            loadMoreBtn.innerText = 'Ver menos';
-            loadMoreBtn.style.display = 'inline-block';
+        // If image is already cached/loaded
+        if (img.complete) {
+            img.classList.add('loaded');
         } else {
-            loadMoreBtn.innerText = 'Ver más';
-            loadMoreBtn.style.display = 'inline-block';
+            img.onload = () => {
+                img.classList.add('loaded');
+            };
         }
-    };
 
-    // Load first batch
-    loadImages();
-
-    // Event listener for button
-    loadMoreBtn.addEventListener('click', loadImages);
-
-    // Event listener for Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && loadMoreBtn.innerText === 'Ver menos') {
-            loadImages(); // Re-uses the reset logic inside loadImages
-        }
+        grid.appendChild(item);
     });
 }
 
@@ -547,7 +465,9 @@ function initLightbox() {
 
     if (!lightbox || !grid) return;
 
-    // Open Lightbox (Event Delegation)
+    // LIGHTBOX DISABLED FOR HOME PAGE
+    // Open Lightbox (Event Delegation) - COMMENTED OUT
+    /*
     grid.addEventListener('click', (e) => {
         // Find closest gallery-item parent
         const item = e.target.closest('.gallery-item');
@@ -556,6 +476,7 @@ function initLightbox() {
             openLightbox(index);
         }
     });
+    */
 
     function openLightbox(index) {
         currentLightboxIndex = index;

@@ -19,11 +19,13 @@
     </div>
 
     <nav class="navbar">
-        <a href="#" class="logo">holakarlos.</a>
+        <a href="#" class="logo">
+            <span class="logo-text">holakarlos</span>
+            <span class="logo-dot" aria-hidden="true"></span>
+        </a>
         <ul class="nav-links">
-            <li><a href="#about">Sobre mí</a></li>
             <li><a href="#gallery">Galería</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#about">Sobre mí</a></li>
         </ul>
         <div class="nav-controls">
             <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
@@ -51,10 +53,14 @@
         <section id="hero" class="hero-section">
             <div class="hero-content">
                 <p class="greeting">Hola, soy holakarlos</p>
-                <h1 class="headline">Explorando el mundo<br>a través de mi lente.</h1>
-                <div class="cta-wrapper">
-                    <a href="#gallery" class="btn primary-btn">Ver Galería</a>
-                    <a href="#contact" class="btn secondary-btn">Contactar</a>
+                <h1 class="headline"><span class="text-highlight">Lo que queda</span><br>cuando pasa.</h1>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Las imágenes se cargarán dinámicamente desde js/content.js -->
                 </div>
             </div>
         </section>
@@ -62,29 +68,16 @@
         <section id="about" class="about-section">
             <div class="container small-container">
                 <h2>Sobre mí</h2>
-                <p>Soy un apasionado de la tecnología y la fotografía. Me dedico profesionalmente al mundo tech, y en
-                    mis ratos libres capturo momentos. Esta web es mi pequeño rincón en internet, una mezcla entre marca
-                    personal y archivo fotográfico.</p>
-                <!-- Aquí podríamos poner más detalles más adelante -->
-            </div>
-        </section>
-
-        <section id="gallery" class="gallery-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Galería</h2>
-                    <p class="subtitle">Una selección de mis capturas favoritas.</p>
-                </div>
-                <div class="gallery-grid" id="gallery-grid">
-                    <!-- Las imágenes se cargarán dinámicamente desde js/content.js -->
-                </div>
+                <p>Mi trabajo es técnico y meticuloso. La fotografía es mi forma de parar y observar. Me interesan lo
+                    discreto, lo cotidiano, los instantes que no hacen ruido. Este espacio es un archivo personal:
+                    imágenes hechas sin prisa, de lo que queda cuando pasa.</p>
             </div>
         </section>
 
         <section id="contact" class="contact-section">
             <div class="container small-container">
-                <h2>Contacto</h2>
-                <p>¿Quieres charlar sobre un proyecto o simplemente saludar? Envíame un mensaje.</p>
+                <div class="footer-divider"></div>
+                <p class="footer-note">Archivo en progreso</p>
                 <a href="mailto:hola@holakarlos.com" class="email-link">hola@holakarlos.com</a>
 
                 <div class="social-links">
