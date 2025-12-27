@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta a los Reyes Magos 🎄</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .wishlist-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .wishlist-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .wishlist-header .emoji {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .section-title .emoji {
+            font-size: 2rem;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .album-card {
+            background: var(--surface-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .album-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .album-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .album-info {
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .album-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .album-artist {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .back-home a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .back-home a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-container {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .wishlist-header h1 {
+                font-size: 2rem;
+            }
+
+            .wishlist-header .emoji {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .album-info {
+                padding: 1rem;
+            }
+
+            .album-title {
+                font-size: 1rem;
+            }
+
+            .album-artist {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Dark mode adjustments */
+        body.dark-mode .album-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .album-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navbar fix for alignment */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Simple Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-text">holakarlos</span>
+            <span class="logo-dot" aria-hidden="true"></span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+                <path class="flash-ray" d="M12 2.5v-2"></path>
+                <path class="flash-ray" d="M16.5 4.5l1.5 -1.5"></path>
+                <path class="flash-ray" d="M7.5 4.5l-1.5 -1.5"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <main>
+        <div class="wishlist-container">
+            <div class="wishlist-header">
+                <span class="emoji">🎄</span>
+                <h1>Carta a los Reyes Magos</h1>
+            </div>
+
+            <h2 class="section-title">
+                <span class="emoji">💿</span>
+                Discos en Vinilo
+            </h2>
+
+            <div class="wishlist-grid">
+                <div class="album-card">
+                    <img src="assets/vinilos/rosalia-lux.jpg.webp" alt="Lux - Rosalía" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Lux</div>
+                        <div class="album-artist">Rosalía</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/510fDjW84TL._UF894,1000_QL80_.jpg" alt="Aproximaciones - Pereza"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Aproximaciones</div>
+                        <div class="album-artist">Pereza</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/lpcd-trece-sidecars-598402_1200x1200_crop_center.jpg.webp"
+                        alt="Trece - Sidecars" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Trece</div>
+                        <div class="album-artist">Sidecars</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/large-6-7.jpg" alt="Un Día en el Mundo - Vetusta Morla"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Un Día en el Mundo</div>
+                        <div class="album-artist">Vetusta Morla</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/Sgt._Pepper's_Lonely_Hearts_Club_Band_album_art.jpg"
+                        alt="Sgt. Pepper's Lonely Hearts Club Band - The Beatles" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Sgt. Pepper's Lonely Hearts Club Band</div>
+                        <div class="album-artist">The Beatles</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/canciones.webp.jpeg"
+                        alt="Canciones Para El Tiempo Y La Distancia - Iván Ferreiro" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Canciones Para El Tiempo Y La Distancia</div>
+                        <div class="album-artist">Iván Ferreiro</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/confesiones.webp.jpeg"
+                        alt="Confesiones De Un Artista De Mierda - Iván Ferreiro" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Confesiones De Un Artista De Mierda</div>
+                        <div class="album-artist">Iván Ferreiro</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/incendios.webp.jpeg" alt="Incendios - Dani Fernández" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Incendios</div>
+                        <div class="album-artist">Dani Fernández</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/ultimodia.png.webp" alt="El Último Día De Nuestras Vidas - Dani Martín"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">El Último Día De Nuestras Vidas</div>
+                        <div class="album-artist">Dani Martín</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/electroviral.png.webp" alt="Electroviral - Supersubmarina"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Electroviral</div>
+                        <div class="album-artist">Supersubmarina</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/santacruz.png.webp" alt="Santacruz - Supersubmarina" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Santacruz</div>
+                        <div class="album-artist">Supersubmarina</div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="assets/vinilos/bcn.png.webp" alt="BCN Directo Barcelona - Supersubmarina"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">BCN Directo Barcelona</div>
+                        <div class="album-artist">Supersubmarina</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">
+                <span class="emoji">👕</span>
+                Ropa y Accesorios
+            </h2>
+
+            <div class="wishlist-grid"
+                style="grid-template-columns: repeat(1, 1fr); max-width: 300px; margin: 0 auto 3rem;">
+                <a href="https://www.decathlon.es/p/_/R-p-350661?mc=8843362" target="_blank" rel="noopener noreferrer"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="album-card" style="cursor: pointer; transition: transform 0.3s;">
+                        <div class="album-cover"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: 700;">
+                            🏃
+                        </div>
+                        <div class="album-info">
+                            <div class="album-title">Cortavientos Running</div>
+                            <div class="album-artist">Decathlon</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">
+                <span class="emoji">💿</span>
+                CD
+            </h2>
+
+            <div class="wishlist-grid"
+                style="grid-template-columns: repeat(1, 1fr); max-width: 300px; margin: 0 auto 3rem;">
+                <div class="album-card">
+                    <img src="assets/cd/9.jpg.webp" alt="Cuando te Muerdes el Labio (Edición Acordeón) - Leiva"
+                        class="album-cover">
+                    <div class="album-info">
+                        <div class="album-title">Cuando te Muerdes el Labio</div>
+                        <div class="album-artist">Leiva (Edición Acordeón)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back-home">
+                <a href="index.html">← Volver a la página principal</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
